@@ -61,7 +61,7 @@ saveTweet.addEventListener("click", (e) => {
         $('body')
             .toast({
                 class: 'warning',
-                message: 'Enter Some Text!'
+                message: 'Enter Some Text! Empty tweets not allowed.'
             })
             ;
     }
@@ -83,10 +83,8 @@ async function saveTweetFunction() {
     var month = new Date().getMonth() + 1;
     var year = new Date().getFullYear();
     let date = todaysDate + "/" + month + "/" + year;
-    console.log("tweetInput" + tweetInput);
     let likes = [];
     let data = { authorName, date, tweetInput, hiddenImgUrl ,email, picture, likes };
-    console.log(data, "here's the data");
     let options = {
         method: 'POST',
         headers: {
@@ -95,8 +93,6 @@ async function saveTweetFunction() {
         body: JSON.stringify(data)
     };
     let res = await fetch('/newtweet', options);
-    console.log(res, "response from backend for save");
-    console.log("tweet saved");
     makeInputNull();
 }
 function makeInputNull() {
@@ -106,7 +102,6 @@ function makeInputNull() {
 
 // Function To get tweets when page loads first time
 async function getTweet() {
-    console.log("function called");
     let res = await fetch(`/getTweet`);
     let tweet = await res.json();
     previousLength = tweet.length;
@@ -188,8 +183,6 @@ getTweet();
 
 // Function to get when new tweet is updated
 async function getNewTweet() {
-    console.log(" prev length" + previousLength);
-    console.log(" get new tweet function called");
     let res = await fetch(`/getTweet`);
     let tweet = await res.json();
 
