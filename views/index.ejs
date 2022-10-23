@@ -1,0 +1,78 @@
+<!-- Including header.ejs file at the top -->
+<%- include("partials/header") %>
+
+    <!-- top section starts -->
+    <div id="home">
+
+        <div id="homeText">
+
+            <h2 style="font-size: 3.1rem;font-weight: 600;">
+                <span style="text-align: left;font-size: 3.4rem;">From breaking news </span>
+                <span>and entertainment</span>,
+                <span>to sports and politics</span>
+            </h2>
+
+            <p style="font-size: 1.5rem;">Get the full story with all the live commentary.</p>
+            <a href="/login"> <button class="ui inverted huge blue button">Join Chitter Now</button></a>
+
+
+        </div>
+        <div id="homeImg">
+            <img src="/images/twitter.png" style="width: 100%;" alt="top-img">
+        </div>
+    </div>
+    <!-- top section ends -->
+    
+    <!-- features section1 -->
+    <div id="section1" class="Box">
+        <img src="/images/twitter.png" alt="fgfh">
+        <div class="sections">
+            <h1>Search</h1>
+            <p style="font-size: 1.3rem;margin-bottom: 30px;">Search Chitter to find the latest news and world events
+                faster. Find popular people, hashtags and photos for any topic you can imagine.
+                Chitter's advanced search finds exactly what you are looking for.
+            </p>
+
+            <a href="/home" class="ui blue button joinBtn">Search Now</a>
+            <a href="/home" class="ui inverted blue button joinBtn">Read Now</a>
+        </div>
+    </div>
+    <!-- features section1 ends -->
+
+    <!-- features section2 -->
+    <div id="section2">
+        <img src="/images/manage.svg" alt="fgfh" style="width: 25%;height: auto;">
+        <div class="sections">
+            <h1>Manage easily</h1>
+            <p style="font-size: 1.3rem;margin-bottom: 30px;">Investment of seconds to create twitter account can save
+                you hours. You can manage all your feed very easily.
+            </p>
+            
+            <a href="/home" class="ui inverted blue button joinBtn">Join Now</a>
+        </div>
+        
+    </div>
+    <!-- features section2 ends -->
+
+
+    <!-- Including footer.ejs file at the bootom -->
+    <%- include("partials/footer") %>
+
+        <script>
+
+            // At top top navbar is visible, after scroll position goes over 630 followingMenu is visible 
+            // This code manages the same
+            myFunction();
+            window.onscroll = function () { myFunction() };
+            function myFunction() {
+                if (document.body.scrollTop > 630 || document.documentElement.scrollTop > 630) {
+                    document.getElementById("followingMenu").style.display = "flex";
+                } else {
+                    document.getElementById("followingMenu").style.display = "none";
+                }
+            }
+
+        </script>
+        </body>
+
+        </html>

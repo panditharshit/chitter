@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>
+    <%= pageTitle %>
+  </title>
+
+  <!-- You MUST include jQuery before Fomantic -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.7/dist/semantic.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.7/dist/semantic.min.js"></script>
+
+  <link rel="stylesheet" href=<%=cssName %> >
+
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch&display=swap" rel="stylesheet">
+
+  <style>
+    /* CSS Reset */
+    body {
+      overflow-y: hidden;
+    }
+
+    /* Outside Box styling */
+
+    #dottedBox {
+      border: 2px dotted;
+      margin: 10px auto;
+      margin-top: 20px;
+      padding: 30px 20px;
+      padding-bottom: 60px;
+      width: 60%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Grenze Gotisch', cursive;
+      font-weight: 900;
+      font-size: 1.3rem;
+    }
+
+    #dottedBox #rightBox {
+      margin-left: 40px;
+      margin-top: 45px;
+      text-align: center;
+    }
+
+    /* logo styling */
+
+    #logo img {
+      width: 45px;
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      z-index: 20;
+    }
+
+    .ui.form {
+      font-size: 1.2rem;
+    }
+
+
+    @media screen and (max-width: 1000px) {
+
+      #dottedBox {
+        flex-direction: column;
+        padding: 70px 20px;
+        width: 90%;
+      }
+
+      #dottedBox form {
+        margin: 40px 0;
+      }
+
+      #dottedBox #rightBox {
+        margin-right: 0px;
+      }
+
+      #rightBox span {
+        display: block;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- outside box starts -->
+  <div id="dottedBox">
+    <!-- logo -->
+    <a id="logo" class="logo-q" href="/"><img src="../images/logo.png" alt="Quiz Town"></a>
+
+    <!-- form for registration starts -->
+    <form action="/register" class="ui form" method="post">
+      <p style="font-size: 1.8rem;">Create your account</p>
+
+      <!-- name input field -->
+      <div class="field">
+        <label>Your Name</label>
+        <div class="ui left icon mini input">
+          <input type="text" placeholder="Enter Name" name="name" required>
+          <i class="user icon"></i>
+        </div>
+      </div>
+
+      <!-- email input field -->
+      <div class="field">
+        <label>Your Email</label>
+        <div class="ui left icon mini input">
+          <input type="email" placeholder="Email" name="username" required>
+          <i class="envelope icon"></i>
+        </div>
+      </div>
+
+      <!-- password input field -->
+      <div class="field">
+        <label>Password</label>
+        <div class="ui left icon mini input">
+          <input type="password" placeholder="Password" name="password" required>
+          <i class="lock icon"></i>
+        </div>
+      </div>
+
+      <!-- confirm password input field -->
+      <div class="field">
+        <label>Confirm Password</label>
+        <div class="ui left icon mini input">
+          <input type="password" placeholder="Confirm Password" name="confirmpassword" required>
+          <i class="unlock alternate icon"></i>
+        </div>
+      </div>
+
+      <!-- checkbox field for confirmation -->
+      <div class="field">
+        <div class="ui checkbox">
+          <input type="checkbox" tabindex="0" name="consent" checked required />
+          <label>I agree to the Terms and Conditions</label>
+        </div>
+      </div>
+
+      <!-- utitilty hidden inputs -->
+      <input type="text" name="authType" value="local" hidden>
+      <input type="text" name="following" value="[]" hidden>
+      <input type="text" name="picture" value="https://fomantic-ui.com/images/avatar/small/joe.jpg" hidden>
+
+
+      <!-- submit button -->
+      <button style="margin-top: 15px;" class="ui right labeled icon button" id="submitBtn" type="submit" name="action">
+        <i class="right arrow icon"></i>
+        Register
+      </button>
+
+    </form>
+    <!-- form for registration ends -->
+
+
+    <!-- right box starts -->
+    <div id="rightBox">
+      <img src="../images/register.svg" style="width:100%;max-width: 340px;" alt="right">
+      <a href="/login" style="color: black;text-decoration: underline;font-size: 1.2rem;">
+        <p>I am already a member</p>
+      </a>
+    </div>
+    <!-- right box ends -->
+  </div>
+  <!-- outside box ends -->
+
+  <!-- divs used for displaying messages passed on to ejs using res.render (rest is done below using jQuery) -->
+  <div id="updateMessage" style="display:none">
+    <%= updateMessage %>
+  </div>
+
+</body>
+
+<!-- jquery script tag -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+
+  // jQuery code to display a toast message on recieving message through res.render 
+  if (document.querySelector("#updateMessage").innerHTML.trim() != "") {
+    $('#updateMessage')
+      .toast({
+        class: 'success',
+        message: document.querySelector("#updateMessage").innerHTML,
+        closeIcon: true,
+      })
+      ;
+  }
+
+</script>
+
+</html>

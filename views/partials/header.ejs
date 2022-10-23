@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        <%= pageTitle %>
+    </title>
+
+    <!-- You MUST include jQuery before Fomantic -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.7/dist/semantic.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.7/dist/semantic.min.js"></script>
+
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href=<%=cssName %> >
+
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch&display=swap" rel="stylesheet">
+
+
+    <style>
+        /* hamburger icon styling */
+        .toc.item {
+            font-size: 1.3rem !important;
+            display: none !important;
+        }
+
+        /* logo styling */
+        .logo {
+            display: flex;
+            align-items: center;
+            padding: 10px 4px !important;
+            color: black;
+        }
+
+        /* media query to handle devices under width of 700px */
+        @media only screen and (max-width: 700px) {
+            .logo {
+                margin: 6px auto !important;
+            }
+
+            .toc.item {
+                display: block !important;
+            }
+
+            #topMenu .right.menu,
+            #followingMenu .right.menu {
+                display: none !important;
+            }
+
+            .logoText {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- EJS code to create user chips to display on navbars -->
+
+    <% let dropdownMenu="" ;
+         if(email !="" ){
+        dropdownMenu=` <div class="menu" style="margin-right: 10px;">
+        <a href="/profile" class="item">Profile</a>
+        <a href="/logout" class="item">Logout</a>
+        </div>
+        `;
+        }
+        else if(email == ""){
+        dropdownMenu = `
+        <div class="menu" style="margin-right: 10px;">
+            <a href="/login" class="item">Login/Register</a>
+        </div>
+        `;
+        }
+        %>
+
+
+        <!-- For creating an animation of navbar , here are 2 navbars topMenu and followingMenu -->
+        <!-- At top top navbar is visible, after scroll position goes over 630 followingMenu is visible -->
+
+        <!-- topMenu starts -->
+        <div class="ui tabular menu" id="topMenu" style="
+        width: 100%;
+        z-index: 100;
+        font-size: 1.1rem;
+        border: none;
+        ">
+             <!-- sidebar trigger(hamburger) which is visible only on small screens -->
+             <a class="toc item left">
+                <i class="sidebar icon"></i>
+            </a>
+            <!-- logo -->
+            <a href="/" class="item logo">
+                <img src="images/logo.png" alt="logo" style="width: 40px;margin-right: 10px;" />
+                <strong class="logoText" style="font-size: 1.5rem;">Chitter</strong>
+            </a>
+            <!-- right menu on navbar -->
+            <div class="right menu">
+                <a href="/blog" class="item ui large secondary tertiary button">
+                    Blog
+                </a>
+                <a href="/careers" class="item ui large secondary tertiary button">
+                    Careers
+                </a>
+
+                <div class="ui dropdown">
+                    <a id="userLabel" style="height: fit-content;margin: 6px 10px;" class="ui basic image big label">
+                        <img src=<%=picture %> />
+                        <%= username %>
+                            <i class="dropdown icon" style="margin-left: 10px; margin-right: 0"></i>
+                    </a>
+                    <%- dropdownMenu %>
+                </div>
+
+                <!-- hidden trigger -->
+                <a class="toc item right" style="visibility: hidden;">
+                    <i class="sidebar icon"></i>
+                </a>
+
+            </div>
+        </div>
+        <!-- top navbar ends -->
+
+
+        <!-- following navbar -->
+        <div class="ui tabular menu" id="followingMenu" style="
+        margin: 0;
+        background-color: white;
+        box-shadow: 0px 0px 2px 0px #999999 !important;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 100;
+        font-size: 1.1rem;
+        border: none;
+        ">
+            <!-- sidebar trigger(hamburger) which is visible only on small screens -->
+            <a class="toc item left">
+                <i class="sidebar icon"></i>
+            </a>
+            <!-- logo -->
+            <a href="/" class="logo">
+                <img src="images/logo.png" alt="logo" style="width: 40px;margin-right: 10px;" />
+                <strong class="logoText" style="font-size: 1.5rem;">Chitter</strong>
+            </a>
+            <!-- right menu on navbar -->
+            <div class="right menu">
+                <a href="https://blog.twitter.com/" class="item ui large secondary tertiary button">
+                    Blog
+                </a>
+                <a href="https://careers.twitter.com/" class="item ui large secondary tertiary button">
+                    Careers
+                </a>
+                <div class="ui dropdown">
+                    <a id="userLabel" style="height: fit-content;margin: 6px 10px;" class="ui basic image big label">
+                        <img src=<%=picture %> />
+                        <%= username %>
+                            <i class="dropdown icon" style="margin-left: 10px; margin-right: 0"></i>
+                    </a>
+                    <%- dropdownMenu %>
+                </div>
+
+                <!-- hidden trigger -->
+                <a class="toc item right" style="visibility: hidden;">
+                    <i class="sidebar icon"></i>
+                </a>
+            </div>
+
+        </div>
+        <!-- following navbar ends -->
+
+
+        <!-- Sidebar Menu -->
+        <div class="ui vertical sidebar menu">
+            <a class="item" href="/blogs">Blogs</a>
+            <a class="item" href="/resources">Careers</a>
+            <div class="ui dropdown">
+                <a id="userLabel" style="height: fit-content;margin: 6px 10px;" class="ui basic image big label">
+                    <img src=<%=picture %> />
+                    <%= username %>
+                        <i class="dropdown icon" style="margin-left: 10px; margin-right: 0"></i>
+                </a>
+                <%- dropdownMenu %>
+            </div>
+        </div>
+        <!-- Sidebar menu ends  -->

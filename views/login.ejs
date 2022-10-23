@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>
+    <%= pageTitle %>
+  </title>
+
+  <!-- You MUST include jQuery before Fomantic -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.7/dist/semantic.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.7/dist/semantic.min.js"></script>
+
+  <link rel="stylesheet" href=<%=cssName %> >
+
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch&display=swap" rel="stylesheet">
+
+  <style>
+    /* CSS Reset */
+    body {
+      overflow-y: hidden;
+    }
+
+    /* Outside Box styling */
+
+    #dottedBox {
+      border: 2px dotted;
+      margin: 10px auto;
+      margin-top: 100px;
+      padding: 30px 20px;
+      padding-bottom: 60px;
+      width: 60%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Grenze Gotisch', cursive;
+      font-weight: 900;
+      font-size: 1.3rem;
+    }
+
+    #dottedBox #rightBox {
+      margin-left: 0px;
+      margin-top: 45px;
+      text-align: center;
+    }
+
+    /* logo styling */
+
+    #logo img {
+      width: 45px;
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      z-index: 20;
+    }
+
+    .ui.form {
+      font-size: 1.2rem;
+    }
+
+    @media screen and (max-width: 1000px) {
+
+      #dottedBox {
+        flex-direction: column;
+        padding: 70px 20px;
+        width: 90%;
+      }
+
+      #dottedBox form {
+        margin: 40px 0;
+      }
+
+      #dottedBox #rightBox {
+        margin-right: 0px;
+      }
+
+      #rightBox span {
+        display: block;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- outside box starts -->
+  <div id="dottedBox">
+    <!-- logo -->
+    <a id="logo" class="logo-q" href="/"><img src="../images/logo.png" alt="Quiz Town"></a>
+
+
+
+    <div id="rightBox" style="margin-right: 60px;margin-top: 25px;text-align: center;">
+      <img src="../images/login.svg" style="width:120%;max-width: 360px;" alt="right">
+      <a href="/register" style="color: black;text-decoration: underline;font-size: 1.2rem;">
+        <p>Create an account</p>
+      </a>
+
+    </div>
+
+    <div>
+      <p style="font-size: 1.8rem;">Sign In</p>
+
+      <!-- form for registration starts -->
+      <form action="/login" class="ui form" style="font-size: 1.2rem;" method="post">
+
+        <!-- email input field -->
+        <div class="field">
+          <label>Email Address</label>
+          <div class="ui left icon mini input" style="margin-bottom: 10px;">
+            <input type="email" placeholder="Your Email" name="username" required>
+            <i class="user icon"></i>
+          </div>
+        </div>
+
+        <!-- password input field -->
+        <div class="field">
+          <label>Password</label>
+          <div class="ui left icon mini input" style="margin-bottom: 10px;">
+            <input type="password" placeholder="Password" name="password" required>
+            <i class="lock icon"></i>
+          </div>
+        </div>
+
+        <!-- submit button -->
+        <button class="ui right labeled icon submit button" type="submit" name="action">
+          <i class="right arrow icon"></i>
+          Login
+        </button>
+
+      </form>
+
+      <!-- form ends here -->
+
+
+    </div>
+  </div>
+  <!-- outside box ends -->
+
+  <!-- divs used for displaying messages passed on to ejs using res.render (rest is done below using jQuery) -->
+  <div id="updateMessage" style="display:none">
+    <%= updateMessage %>
+  </div>
+
+</body>
+
+<script>
+
+  // jQuery code to display a toast message on recieving message through res.render 
+  if (document.querySelector("#updateMessage").innerHTML.trim() != "") {
+    $('#updateMessage')
+      .toast({
+        class: 'success',
+        message: document.querySelector("#updateMessage").innerHTML,
+        closeIcon: true,
+      })
+      ;
+  }
+
+</script>
+
+</html>

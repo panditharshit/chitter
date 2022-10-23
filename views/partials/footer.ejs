@@ -1,0 +1,72 @@
+<style>
+  /* footer styling */
+  .ui.footer {
+    margin-top: 60px !important;
+    padding: 45px 0;
+    background-color: #f5f5f5 !important;
+    font-size: 1.1rem !important;
+  }
+
+  .ui.footer .item {
+    color: black !important;
+  }
+
+  .ui.footer .item:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<!-- footer starts -->
+<div class="ui  vertical footer segment">
+  <div class="ui center aligned container">
+    <div class="ui stackable  divided grid">
+      <div class="five wide column">
+        <div class="ui  link list">
+          <a href="/" class="item">About</a>
+          <a href="/" class="item">Help Center</a>
+          <a href="/" class="item">Terms of Service</a>
+          <a href="/" class="item">Ads info</a>
+        </div>
+      </div>
+      <div class="five wide column">
+        <div class="ui  link list">
+          <a href="/" class="item">Blog</a>
+          <a href="/" class="item">Status</a>
+          <a href="/" class="item">Careers</a>
+          <a href="/" class="item">Brand Resources</a>
+          <a href="/" class="item">Advertising</a>
+          <a href="/" class="item">Marketing</a>
+        </div>
+      </div>
+      <div class="five wide column">
+        <div class="ui  link list">
+          <a href="/" class="item">Twitter for Business</a>
+          <a href="/" class="item">Developers</a>
+          <a href="/" class="item">Directory</a>
+          <a href="/" class="item">Settings</a>
+        </div>
+      </div>
+    </div>
+    <div class="ui  section divider"></div>
+    <img src="/images/logo.png" style="width: 45px;" class="ui centered image">
+    <div class="ui horizontal  small divided link list">
+      <a href="/" class="item">Privacy Policy</a>
+      <a href="/" class="item">Cookie Policy</a>
+    </div>
+    <p class="item">© 2021 Chitter, Inc.</p>
+  </div>
+</div>
+<!-- footer ends -->
+
+<script>
+  // Jquery code to trigger dropdown menu
+  $('.ui.dropdown')
+    .dropdown()
+    ;
+  // Jquery code to trigger sidebar on clicking hamburger icon
+  $(document).ready(function () {
+    // create sidebar and attach to menu open
+    $(".ui.sidebar").sidebar("attach events", ".toc.item");
+  });
+
+</script>
