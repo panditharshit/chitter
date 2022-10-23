@@ -137,44 +137,6 @@ passport.deserializeUser(function (id, done) {
 // POST requests handling
 
 
-// post function for register
-app.post("/register", function (req, res) {
-    // check if password and confirmpassword are same or not
-    // if true
-    if (req.body.password != req.body.confirmpassword) {
-        res.redirect(url.format({
-            pathname: `/register`,
-            query: {
-                message: "Confirm password does not match."
-            }
-        }));
-    }
-    // if false
-    else {
-        req.body.following = [req.body.username];
-        let userdetails = new UserDetails(req.body);
-        userdetails.save();
-
-        User.register({ username: req.body.username }, req.body.password, function (err, user) {
-            if (err) {
-                console.log(err);
-                res.redirect(url.format({
-                    pathname: `/register`,
-                    query: {
-                        message: "A user with same email already exists."
-                    }
-                }));
-            } else {
-                passport.authenticate("local")(req, res, function () {
-                    console.log(user);
-                    res.redirect("/home");
-                });
-            }
-        });
-    }
-});
-
-
 // post function for login
 app.post("/login", function (req, res) {
     const user = new User({
@@ -190,6 +152,44 @@ app.post("/login", function (req, res) {
             });
         }
     });
+});
+
+
+// post function for register
+app.post("/register", function (req, res) {
+    // check if password and confirmpassword are same or not
+    // if true
+    if (req.body.password != req.body.confirmpassword) {
+        res.redirect(url.format({
+            pathname: `/register`,
+            query: {
+                message: "Confirm password does not match with New Password."
+            }
+        }));
+    }
+    // if false
+    else {
+        req.body.following = [req.body.username];
+        let userdetails = new UserDetails(req.body);
+        userdetails.save();
+
+        User.register({ username: req.body.username }, req.body.password, function (err, user) {
+            if (err) {
+                console.log(err);
+                res.redirect(url.format({
+                    pathname: `/register`,
+                    query: {
+                        message: "A user with same email address already exists."
+                    }
+                }));
+            } else {
+                passport.authenticate("local")(req, res, function () {
+                    console.log(user);
+                    res.redirect("/home");
+                });
+            }
+        });
+    }
 });
 
 
